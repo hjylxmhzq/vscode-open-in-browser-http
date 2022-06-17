@@ -2,6 +2,7 @@ import * as http from 'http';
 import * as open from 'open';
 import * as vscode from 'vscode';
 import { Middleware } from './middlewares';
+import cors from './middlewares/cors';
 import staticFile from './middlewares/static';
 
 const instanceMap = new Map<string, { instance: http.Server, files: Set<string> }>();
@@ -13,6 +14,7 @@ export function serveFile(baseDir: string, relativeFile: string) {
     if (!instanceInfo) {
 
         const middlewares: Middleware[] = [
+            cors(),
             staticFile(baseDir),
         ];
 
