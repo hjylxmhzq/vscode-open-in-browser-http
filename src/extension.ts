@@ -2,7 +2,7 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 import * as path from 'path';
-import { serveFile } from './utils';
+import { closeAllServer, serveFile } from './utils';
 
 // const httpServer = new HttpServer(workspace);
 // this method is called when your extension is activated
@@ -31,4 +31,6 @@ export function activate(context: vscode.ExtensionContext) {
 }
 
 // this method is called when your extension is deactivated
-export function deactivate() {}
+export function deactivate() {
+	closeAllServer();
+}

@@ -19,7 +19,17 @@
 				"command": "open-in-browser-http.openInBrowser",
 				"title": "Open In Browser(HTTP)"
 			}
-		]
+		],
+		"menus": {
+			"editor/context": [
+				{
+					"when": "resourceExtname == .html || resourceExtname == .htm",
+					"command": "open-in-browser-http.openInBrowser",
+					"alt": "open-in-browser-http.openInBrowser",
+					"group": "openinbrowser"
+				}
+			]
+		}
 	},
 	"scripts": {
 		"vscode:prepublish": "yarn run compile",
