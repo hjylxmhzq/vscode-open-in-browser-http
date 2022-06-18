@@ -15,7 +15,7 @@
 	"main": "./out/extension.js",
 	"contributes": {
 		"configuration": {
-			"title": "Enable CORS",
+			"title": "Open In Browser (HTTP)",
 			"properties": {
 				"open-in-browser-http.CORS": {
 					"type": "boolean",
@@ -26,6 +26,12 @@
 					"type": "string",
 					"default": "",
 					"description": "use proxy for http request"
+				},
+				"open-in-browser-http.defaultBrowser": {
+					"type": "string",
+					"default": "chrome",
+					"enum": ["chrome", "firefox", "edge"],
+					"description": "default browser for opening file"
 				}
 			}
 		},

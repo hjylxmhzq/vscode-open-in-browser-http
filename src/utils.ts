@@ -20,7 +20,7 @@ export function serveFile(baseDir: string, relativeFile: string) {
         ];
 
         const corsEnabled = config.get('open-in-browser-http.CORS');
-        
+
         if (corsEnabled) {
             middlewares.unshift(cors());
         }
@@ -56,17 +56,21 @@ export function serveFile(baseDir: string, relativeFile: string) {
     const port = typeof bindAddress === 'string' ? bindAddress.split(':').pop() : bindAddress?.port;
 
     if (port) {
-        open(`http://localhost:${port}${relativeFile}`, { wait: true, app: { name: open.apps.chrome } })
+        const browser = config.get('open-in-browser-http.defaultBrowser') as open.AppName;
+        open(`http://localhost:${port}${relativeFile}`, { wait: true, allowNonzeroExitCode: true, app: { name: open.apps[browser] } })
             .then(() => {
                 instanceInfo?.files.delete(relativeFile);
                 if (instanceInfo?.files.size === 0) {
-                    vscode.window.showInformationMessage('server stopped cause browser is closed');
+                    vscode.window.showInformationMessage('server stopped because browser is closed');
                     instanceInfo.instance.close();
                     instanceMap.delete(baseDir);
                 }
+            })
+            .catch((err) => {
+                vscode.window.showErrorMessage(`ERROR: can not open browser: ${browser}, please make sure you have the browser installed.`);
             });
     } else {
-        throw new Error('can not create http server');
+        vscode.window.showErrorMessage(`can not create http server!`);
     }
 }
 
