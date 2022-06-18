@@ -14,6 +14,21 @@
 	],
 	"main": "./out/extension.js",
 	"contributes": {
+		"configuration": {
+			"title": "Enable CORS",
+			"properties": {
+				"open-in-browser-http.CORS": {
+					"type": "boolean",
+					"default": true,
+					"description": "enable cross origin resource sharing headers(cors)"
+				},
+				"open-in-browser-http.proxy": {
+					"type": "string",
+					"default": "",
+					"description": "use proxy for http request"
+				}
+			}
+		},
 		"commands": [
 			{
 				"command": "open-in-browser-http.openInBrowser",

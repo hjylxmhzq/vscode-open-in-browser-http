@@ -11,12 +11,19 @@ export function serveFile(baseDir: string, relativeFile: string) {
 
     let instanceInfo = instanceMap.get(baseDir);
 
+    const config = vscode.workspace.getConfiguration();
+
     if (!instanceInfo) {
 
         const middlewares: Middleware[] = [
-            cors(),
             staticFile(baseDir),
         ];
+
+        const corsEnabled = config.get('open-in-browser-http.CORS');
+        
+        if (corsEnabled) {
+            middlewares.unshift(cors());
+        }
 
         const requestListener: http.RequestListener = async (req, resp) => {
 
@@ -67,4 +74,6 @@ export function closeAllServer() {
     for (let instanceInfo of instanceMap.values()) {
         instanceInfo.instance.close();
     }
+    instanceMap.clear();
+    console.log('all server is closed');
 }
