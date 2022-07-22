@@ -14,7 +14,6 @@ export function serveFile(baseDir: string, relativeFile: string) {
     const config = vscode.workspace.getConfiguration();
 
     if (!instanceInfo) {
-
         const middlewares: Middleware[] = [
             staticFile(baseDir),
         ];
@@ -26,7 +25,6 @@ export function serveFile(baseDir: string, relativeFile: string) {
         }
 
         const requestListener: http.RequestListener = async (req, resp) => {
-
             let idx = -1;
 
             const applyMiddlewares = async () => {
@@ -40,7 +38,6 @@ export function serveFile(baseDir: string, relativeFile: string) {
             };
 
             applyMiddlewares();
-
         };
 
         const instance = http.createServer(requestListener);
@@ -70,7 +67,7 @@ export function serveFile(baseDir: string, relativeFile: string) {
                 vscode.window.showErrorMessage(`ERROR: can not open browser: ${browser}, please make sure you have the browser installed.`);
             });
     } else {
-        vscode.window.showErrorMessage(`can not create http server!`);
+        vscode.window.showErrorMessage(`ERROR: can not create http server`);
     }
 }
 

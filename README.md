@@ -1,20 +1,20 @@
 # open-in-browser-http README
 
-This is the README for your extension "open-in-browser-http". After writing up a brief description, we recommend including the following sections.
+Open In Browser plugin for vscode. This plugin use http instead of file protocol to make features only available in http environment work; It's a combination of serving files and open them in browser;
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+Right click in your .html/.htm file, and you can see the context menu with option named [open in browser(HTTP)], select it and things work :).
 
-For example if there is an image subfolder under your extension project workspace:
+All files that served in the same project will share a http server, so that files will have relative path as follow:
 
-\!\[feature X\]\(images/feature-x.png\)
+e.g.
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+/path/to/file -> http://localhost:xxx/path/to/file
 
-## Requirements
+/path/to/another/file -> http://localhost:xxx/path/to/another/file
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+When browser is closed, the server will also be stop.
 
 ## Extension Settings
 

@@ -4,7 +4,7 @@
 	"description": "Open file in browser via http protocol",
 	"version": "0.0.1",
 	"engines": {
-		"vscode": "^1.68.0"
+		"vscode": "^1.68.1"
 	},
 	"categories": [
 		"Other"
